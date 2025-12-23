@@ -21,6 +21,7 @@ SELECT * FROM transactions ;
 
 CREATE TABLE comptes(
 
+
     id INT AUTO_INCREMENT PRIMARY KEY,
     sold DECIMAL(10,2) NOT NULL DEFAULT 0,
     numero VARCHAR(255) NOT NULL UNIQUE,
