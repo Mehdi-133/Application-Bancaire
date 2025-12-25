@@ -25,8 +25,8 @@ abstract class Compte extends CompteRepository{
         return $this->sold;
     }
 
-    abstract public function deposer(float $montant): void;
-    abstract public function retirer(float $montant): void;
+    abstract public function deposer(float $amount): bool;
+    abstract public function retirer(float $amount): bool;
 }
 
 

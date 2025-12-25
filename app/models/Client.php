@@ -38,17 +38,11 @@ class Client extends ClientRepository
 
     public function setName(string $nom): void
     {
-        if (strlen($nom) < 3) {
-            echo "Name must contain at least 3 characters";
-        }
         $this->nom = $nom;
     }
 
     public function setEmail(string $email): void
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "Invalid email address";
-        }
         $this->email = $email;
     }
 }
