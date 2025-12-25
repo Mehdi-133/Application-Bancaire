@@ -19,3 +19,6 @@ require_once __DIR__ . "/../repositories/client_repos.php";
     $clientRepository->create($client4);
     echo "Client created successfully ";
 
+
+    
+

@@ -14,6 +14,9 @@ class ClientRepository
         $this->pdo = $this->db->connect();
     }
 
+
+
+
     public function create(Client $client)
     {
         $sql = "INSERT INTO clients (nom, email) VALUES (?, ?)";
@@ -22,6 +25,23 @@ class ClientRepository
             $client->getName(),
             $client->getEmail()
         ]);
+    }
+
+
+    
+    public function allClient()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM clients");
+        $clients = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $clients[] = new Client(
+                $row['nom'],
+                $row['email'],
+                $row['id']
+            );
+        }
+        return $clients;
     }
 
 }

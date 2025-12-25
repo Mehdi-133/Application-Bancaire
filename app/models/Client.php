@@ -1,6 +1,10 @@
 <?php
 
-class Client
+require_once "BaseModel.php";
+
+
+
+class Client extends ClientRepository 
 {
     private ?int $id;
     private string $nom;
@@ -13,7 +17,7 @@ class Client
         $this->id = $id;
     }
 
-  
+
     public function getId(): ?int
     {
         return $this->id;
