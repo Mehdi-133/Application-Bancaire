@@ -61,6 +61,7 @@ class ClientRepository
                 $row['nom'],
                 $row['email'],
                 $row['id']
+                
             );
         }
 
