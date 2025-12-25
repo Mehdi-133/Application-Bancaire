@@ -1,11 +1,8 @@
 <?php
 
-require_once  "/../repositories/client_repos.php";
+require_once  __DIR__  .  "/../../repositories/compte_repos.php";
 
 abstract class Compte extends CompteRepository{
-
-
-    
 
     protected int $client_id;
     protected string $numero;
