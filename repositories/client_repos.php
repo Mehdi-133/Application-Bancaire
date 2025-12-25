@@ -90,10 +90,11 @@ class ClientRepository
     {
         if ($id <= 0) {
            echo "id is missing";
-           
+
         }
 
         $stmt = $this->pdo->prepare("DELETE FROM clients WHERE id = ?");
         return $stmt->execute([$id]);
+        
     }
 }
