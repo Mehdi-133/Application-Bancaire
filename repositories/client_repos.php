@@ -61,7 +61,7 @@ class ClientRepository
                 $row['nom'],
                 $row['email'],
                 $row['id']
-                
+
             );
         }
 
@@ -90,6 +90,7 @@ class ClientRepository
     {
         if ($id <= 0) {
            echo "id is missing";
+           
         }
 
         $stmt = $this->pdo->prepare("DELETE FROM clients WHERE id = ?");
