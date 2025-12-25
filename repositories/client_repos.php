@@ -41,6 +41,7 @@ class ClientRepository
         if (trim($nom) === '') {
             echo "you should enter a name";
         }
+        
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
              echo "update invalid";
@@ -95,6 +96,6 @@ class ClientRepository
 
         $stmt = $this->pdo->prepare("DELETE FROM clients WHERE id = ?");
         return $stmt->execute([$id]);
-        
+
     }
 }
