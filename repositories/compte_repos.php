@@ -40,7 +40,23 @@ class CompteRepository
 
         }
 
+    public function getCompteByid($id): ?array {
+
+        if ($id <= 0 ) {
+           return null;
+        }
+
+        $stmt = $this->pdo->prepare("SELECT * FROM comptes WHERE id = ?");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row ? : null;
+
+    }
+
     
+
+
     
         
 

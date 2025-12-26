@@ -76,4 +76,6 @@ class ClientRepository
         $stmt = $this->pdo->prepare("DELETE FROM clients WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
+    
 }
