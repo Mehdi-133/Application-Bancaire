@@ -14,57 +14,54 @@ class CompteRepository
         $this->pdo = $db->connect();
     }
 
-    public function createCompte(int $client_id , string $numero , string $type_compte , float $sold = 0) :bool
+    public function createCompte(int $client_id, string $numero, string $type_compte, float $sold = 0): bool
     {
-       if ($client_id <= 0 || trim($numero) === "")  {
-        return false;
-       }
+        if ($client_id <= 0 || trim($numero) === "") {
+            return false;
+        } elseif (!in_array($type_compte, ["courant", "epargne"])) {
 
-       elseif(!in_array($type_compte , ["courant ", "epargne"])){
+            return false;
+        }
 
-        return false;
-
-       }
-
-       $sql = "INSERT INTO comptes (client_id , numero , type_compte , sold) VALUES (:clientid , :numero , :type_cpt , :sold ) " ;
-       $stmt = $this->pdo->prepare($sql);
-       return  $stmt ->execute([':clientid'=>$client_id ,':numero'=> $numero ,':type_cpt'=> $type_compte,':sold'=> $sold]);
-
+        $sql = "INSERT INTO comptes (client_id , numero , type_compte , sold) VALUES (:clientid , :numero , :type_cpt , :sold ) ";
+        $stmt = $this->pdo->prepare($sql);
+        return  $stmt->execute([':clientid' => $client_id, ':numero' => $numero, ':type_cpt' => $type_compte, ':sold' => $sold]);
     }
 
 
-    public function getALLCompte(){
+    public function getALLCompte()
+    {
 
         $stmt = $this->pdo->query("SELECT * FROM comptes");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        }
+    public function getCompteByid($id): ?array
+    {
 
-    public function getCompteByid($id): ?array {
-
-        if ($id <= 0 ) {
-           return null;
+        if ($id <= 0) {
+            return null;
         }
 
         $stmt = $this->pdo->prepare("SELECT * FROM comptes WHERE id = ?");
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $row ? : null;
-
+        return $row ?: null;
     }
 
-    
 
+    public function deleteCompte(int $id): bool
+    {
+        if ($id <= 0) {
+            return false;
+        }
 
-    
-        
+        $stmt = $this->pdo->prepare(
+            "DELETE FROM comptes WHERE id = ? AND sold = 0"
+        );
+        $stmt->execute([$id]);
 
-
-
-
-
-
-
-    
+        return $stmt->rowCount() > 0;
+    }
 }
