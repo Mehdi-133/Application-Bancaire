@@ -43,6 +43,7 @@ class Client extends ClientRepository
 
     public function setEmail(string $email): void
     {
+
         $this->email = $email;
     }
 }

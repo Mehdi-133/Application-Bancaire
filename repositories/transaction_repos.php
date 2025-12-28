@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . "/../config/database.php";
-require_once __DIR__ . "/../models/Transaction.php";
+require_once __DIR__ . "/../app/config/database.php";
+require_once __DIR__ . "/../app/models/Transaction.php";
 
 class TransactionRepository
 {
@@ -19,12 +19,12 @@ class TransactionRepository
             return false;
         }
 
-        if (!in_array($transaction->getType(), ["deposit", "withdraw"])) {
+        if (!in_array($transaction->getType(), ["depot", "retrait"])) {
             return false;
         }
 
-        $sql = "INSERT INTO transactions (compte_id, type, montant, date_operation)
-                VALUES (:compte_id, :type, :amount, :date_op)";
+        $sql = "INSERT INTO transactions (compte_id, type_operation, montant, date_transaction)
+                VALUES (:compte_id, :type, :montant, :date)";
 
         $stmt = $this->pdo->prepare($sql);
 
@@ -32,7 +32,7 @@ class TransactionRepository
             ":compte_id" => $transaction->getIdCompte(),
             ":type"      => $transaction->getType(),
             ":montant"   => $transaction->getAmount(),
-            ":date_op"   => $transaction->getDate()
+            ":date"      => $transaction->getDate()
         ]);
     }
 
@@ -43,7 +43,7 @@ class TransactionRepository
         }
 
         $stmt = $this->pdo->prepare(
-            "SELECT * FROM transactions WHERE compte_id = ? "
+            "SELECT * FROM transactions WHERE compte_id = ?"
         );
         $stmt->execute([$compte_id]);
 
